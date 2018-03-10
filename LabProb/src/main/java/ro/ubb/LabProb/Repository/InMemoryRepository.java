@@ -22,7 +22,7 @@ public class InMemoryRepository<ID, T extends BaseEntity<ID>> implements Reposit
     @Override
     public Optional<T> findOne(ID id)
     {
-        if (id == null) { throw new IllegalArgumentException("ID must not be null"); }
+        if (id == null) { throw new IllegalArgumentException("ID must not be null !"); }
         return Optional.ofNullable(entities.get(id));
     }
 
@@ -38,10 +38,11 @@ public class InMemoryRepository<ID, T extends BaseEntity<ID>> implements Reposit
     {
         try
         {
-            if (entity == null)
+            if (entity == null )
             {
-                throw new ValidatorException("ID must not be null");
+                throw new ValidatorException("ID must not be null !");
             }
+
             validator.validate(entity);
             return Optional.ofNullable(entities.putIfAbsent(entity.getId(), entity));
         }
@@ -67,7 +68,8 @@ public class InMemoryRepository<ID, T extends BaseEntity<ID>> implements Reposit
     {
         try
         {
-            if (entity == null) {
+            if (entity == null)
+            {
                 throw new ValidatorException("Entity must not be null");
             }
 

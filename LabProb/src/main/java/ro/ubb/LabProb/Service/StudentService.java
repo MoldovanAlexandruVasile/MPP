@@ -18,6 +18,10 @@ public class StudentService
 
     public void addStudent(Student student) throws ValidatorException { repository.save(student); }
 
+    public void deleteStudent(Long id) throws ValidatorException { repository.delete(id); }
+
+    public void updateStudent(Student student) throws ValidatorException { repository.update(student); }
+
     public Set<Student> getAllStudents()
     {
         Iterable<Student> students = repository.findAll();

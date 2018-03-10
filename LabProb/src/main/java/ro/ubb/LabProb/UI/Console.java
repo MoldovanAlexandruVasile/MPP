@@ -25,17 +25,21 @@ public class Console
             Scanner scan = new Scanner(System.in);
             int s = scan.nextInt();
             if (s == 1) addStudent();
-            else if (s == 2) printAllStudents();
-            else if (s == 3) filterStudents();
+            else if (s == 2) deleteStudent();
+            else if (s == 3) updateStudent();
+            else if (s == 4) printAllStudents();
+            else if (s == 5) filterStudents();
             else if (s == 0) break;
         }
     }
 
-    public void printMenu()
+    private void printMenu()
     {
         System.out.println("\n\n\t1. Add a student.");
-        System.out.println("\t2. Print all students.");
-        System.out.println("\t3. Filter by name.");
+        System.out.println("\t2. Delete a Student.");
+        System.out.println("\t3. Update a student.");
+        System.out.println("\t4. Print all students.");
+        System.out.println("\t5. Filter by name.");
         System.out.println("\t0. Exit.");
         System.out.print("\t\tInput an option: ");
     }
@@ -64,25 +68,12 @@ public class Console
         students.stream().forEach(System.out::println);
     }
 
-    private void addStudent()
-    {
-        Student student = readStudent();
-        try
-        {
-            studentService.addStudent(student);
-        }
-        catch (ValidatorException e)
-        {
-            System.out.println(e.getMessage());
-        }
-    }
-
     private Student readStudent()
     {
         BufferedReader bufferRead = new BufferedReader(new InputStreamReader(System.in));
         try
         {
-            System.out.print("ID: ");
+            System.out.print("\nID: ");
             Long id = Long.valueOf(bufferRead.readLine());
             System.out.print("Serial number: ");
             String serialNumber = bufferRead.readLine();
@@ -99,5 +90,49 @@ public class Console
             System.out.println(ex.getMessage());
         }
         return null;
+    }
+
+    private void addStudent()
+    {
+        Student student = readStudent();
+        try
+        {
+            studentService.addStudent(student);
+            System.out.println("\tStudent added !");
+        }
+        catch (ValidatorException e)
+        {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    private void deleteStudent()
+    {
+        try
+        {
+            BufferedReader bufferRead = new BufferedReader(new InputStreamReader(System.in));
+            System.out.print("ID: ");
+            Long id = Long.valueOf(bufferRead.readLine());
+            studentService.deleteStudent(id);
+            System.out.println("\tStudent deleted !");
+        }
+        catch (ValidatorException | IOException e)
+        {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    private void updateStudent()
+    {
+        Student student = readStudent();
+        try
+        {
+            studentService.updateStudent(student);
+            System.out.println("\tStudent updated !");
+        }
+        catch (ValidatorException e)
+        {
+            System.out.println(e.getMessage());
+        }
     }
 }

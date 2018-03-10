@@ -2,18 +2,13 @@ package ro.ubb.LabProb.Domain;
 
 public class Problem extends ro.ubb.LabProb.Domain.BaseEntity<Long>
 {
-    private String ID;
     private String description;
 
-    public Problem(String ID, String description)
+    public Problem(String description)
     {
-        this.ID = ID;
         this.description = description;
     }
 
-    public String getID() { return ID; }
-
-    public void setID(String ID) { this.ID = ID; }
 
     public String getDescription() { return description; }
 
@@ -28,8 +23,6 @@ public class Problem extends ro.ubb.LabProb.Domain.BaseEntity<Long>
 
         Problem problem = (Problem) o;
 
-        if (!ID.equals(problem.ID))
-            return false;
 
         return description.equals(problem.description);
     }
@@ -37,12 +30,12 @@ public class Problem extends ro.ubb.LabProb.Domain.BaseEntity<Long>
     @Override
     public int hashCode()
     {
-        int result = ID.hashCode();
+        int result = 1;
         result = 31 * result + description.hashCode();
         return result;
     }
     @Override
     public String toString() {
-        return "Problem{" + "ID='" + ID + '\'' + ", description='" + description + '\'' + '}';
+        return "Problem{ description = " + description + "}";
     }
 }
