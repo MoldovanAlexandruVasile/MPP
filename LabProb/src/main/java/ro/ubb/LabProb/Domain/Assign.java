@@ -5,10 +5,10 @@ public class Assign extends ro.ubb.LabProb.Domain.BaseEntity<Long>
     private String PID;
     private String SID;
 
-    public Assign(String PID, String SID)
+    public Assign(String SID, String PID)
     {
-        this.PID = PID;
         this.SID = SID;
+        this.PID = PID;
     }
 
     public String getPID() { return PID; }
@@ -45,6 +45,6 @@ public class Assign extends ro.ubb.LabProb.Domain.BaseEntity<Long>
     @Override
     public String toString()
     {
-        return "Assign{" + "PID='" + PID + '\'' + ", SID='" + SID + '\'' + '}';
+        return "Assign{" + "SID = " + SID + ", PID = " + PID + "} " + super.toString();
     }
 }

@@ -36,6 +36,6 @@ public class Problem extends ro.ubb.LabProb.Domain.BaseEntity<Long>
     }
     @Override
     public String toString() {
-        return "Problem{ description = " + description + "}";
+        return "Problem{ description = " + description + "} " + super.toString();
     }
 }

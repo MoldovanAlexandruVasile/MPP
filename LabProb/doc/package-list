@@ -1,7 +1,8 @@
+LabProb.Domain
+LabProb.Repository
 ro.ubb.LabProb
 ro.ubb.LabProb.Domain
 ro.ubb.LabProb.Domain.Validator
 ro.ubb.LabProb.Repository
 ro.ubb.LabProb.Service
-ro.ubb.LabProb.Test
 ro.ubb.LabProb.UI
