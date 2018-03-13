@@ -1,15 +1,14 @@
 package ro.ubb.LabProb;
 
 import ro.ubb.LabProb.Domain.Assign;
+import ro.ubb.LabProb.Domain.Grading;
 import ro.ubb.LabProb.Domain.Problem;
 import ro.ubb.LabProb.Domain.Student;
-import ro.ubb.LabProb.Domain.Validator.AssignValidator;
-import ro.ubb.LabProb.Domain.Validator.ProblemValidator;
-import ro.ubb.LabProb.Domain.Validator.StudentValidator;
-import ro.ubb.LabProb.Domain.Validator.Validator;
+import ro.ubb.LabProb.Domain.Validator.*;
 import ro.ubb.LabProb.Repository.InMemoryRepository;
 import ro.ubb.LabProb.Repository.Repository;
 import ro.ubb.LabProb.Service.AssignService;
+import ro.ubb.LabProb.Service.GradingService;
 import ro.ubb.LabProb.Service.ProblemService;
 import ro.ubb.LabProb.Service.StudentService;
 import ro.ubb.LabProb.UI.Console;
@@ -34,7 +33,13 @@ public class Main
         AssignService assignService = new AssignService(assignRepository);
         populateAssignRepo(assignService);
 
-        Console console = new Console(studentService, problemService, assignService);
+        Validator<Grading> gradingValidator = new GradingValidator();
+        Repository<Long,Grading> gradingRepository = new InMemoryRepository<>(gradingValidator);
+        GradingService gradingService=new GradingService(gradingRepository);
+        populateGradingRepo(gradingService);
+
+
+        Console console = new Console(studentService, problemService, assignService,gradingService);
         console.runConsole();
     }
 
@@ -84,5 +89,18 @@ public class Main
         as.addAssign(a1);
         as.addAssign(a2);
         as.addAssign(a3);
+    }
+    private static void populateGradingRepo(GradingService gs)
+    {
+        Grading g1=new Grading("1",9);
+        g1.setId(new Long(1));
+
+        Grading g2= new Grading("2",7);
+        g2.setId(new Long(2));
+
+        Grading g3= new Grading("3",4);
+        g3.setId(new Long(3));
+
+        gs.addGrading(g1);gs.addGrading(g2);gs.addGrading(g3);
     }
 }

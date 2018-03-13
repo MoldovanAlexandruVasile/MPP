@@ -1,10 +1,11 @@
 package ro.ubb.LabProb.Service;
 
 import ro.ubb.LabProb.Domain.Assign;
+import ro.ubb.LabProb.Domain.Problem;
 import ro.ubb.LabProb.Domain.Validator.ValidatorException;
 import ro.ubb.LabProb.Repository.Repository;
-import java.util.HashSet;
-import java.util.Set;
+
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
@@ -16,6 +17,7 @@ public class AssignService
     {
         this.repository = repository;
     }
+
 
     public void addAssign(Assign assign) throws ValidatorException { repository.save(assign); }
 
@@ -38,5 +40,14 @@ public class AssignService
         filteredAssigns.removeIf(student -> !student.getSID().contains(s));
 
         return filteredAssigns;
+    }
+    public String mostAssigned()
+    {
+        Iterable<Assign> assigns=repository.findAll();
+        List<String> problems=new ArrayList<>();
+        problems=StreamSupport.stream(assigns.spliterator(),false).map(p->p.getPID()).collect(Collectors.toList());
+        Map<String, Long> counts =
+                problems.stream().collect(Collectors.groupingBy(e -> e, Collectors.counting()));
+        return counts.entrySet().stream().max((entry1, entry2) -> entry1.getValue() > entry2.getValue() ? 1 : -1).get().getKey();
     }
 }

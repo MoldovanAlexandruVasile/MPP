@@ -1,10 +1,13 @@
 package ro.ubb.LabProb.UI;
 
 import ro.ubb.LabProb.Domain.Assign;
+import ro.ubb.LabProb.Domain.Grading;
 import ro.ubb.LabProb.Domain.Problem;
 import ro.ubb.LabProb.Domain.Student;
+import ro.ubb.LabProb.Domain.Validator.Validator;
 import ro.ubb.LabProb.Domain.Validator.ValidatorException;
 import ro.ubb.LabProb.Service.AssignService;
+import ro.ubb.LabProb.Service.GradingService;
 import ro.ubb.LabProb.Service.ProblemService;
 import ro.ubb.LabProb.Service.StudentService;
 import java.io.BufferedReader;
@@ -18,12 +21,14 @@ public class Console
     private StudentService studentService;
     private ProblemService problemService;
     private AssignService assignService;
+    private GradingService gradingService;
 
-    public Console(StudentService studentService, ProblemService problemService, AssignService assignService)
+    public Console(StudentService studentService, ProblemService problemService, AssignService assignService,GradingService gradingService)
     {
         this.studentService = studentService;
         this.problemService = problemService;
         this.assignService = assignService;
+        this.gradingService=gradingService;
     }
 
     public void runConsole()
@@ -77,9 +82,26 @@ public class Console
                     else if (s2 == 3) updateAssign();
                     else if (s2 == 4) printAllAssigns();
                     else if (s2 == 5) filterAssign();
+                    else if(s2==6)mostAssigned();
                     else if (s2 == 0) break;
                 }
             }
+            else if (s==4)
+            {
+                while(true)
+                {
+                    printGradingMenu();
+                    Scanner scan2 = new Scanner(System.in);
+                    int s2=scan2.nextInt();
+                    if(s2==1) addGrading();
+                    else if(s2==2)deleteGrading();
+                    else if(s2==3)updateGrading();
+                    else if(s2==4)printAllGradings();
+                    else if(s2==5)filterGradings();
+                    else if(s2==0)break;
+                }
+            }
+
             else if (s == 0) break;
         }
     }
@@ -89,6 +111,7 @@ public class Console
         System.out.println("\n\n\t1. Student operations.");
         System.out.println("\t2. Problem operations.");
         System.out.println("\t3. Assign operations.");
+        System.out.println("\t4. Grading operations.");
         System.out.println("\t0. Exit.");
         System.out.print("\t\tInput an option: ");
     }
@@ -122,6 +145,17 @@ public class Console
         System.out.println("\t\t\t3. Update an assign.");
         System.out.println("\t\t\t4. Print all assigns.");
         System.out.println("\t\t\t5. Filter assigns by student ID.");
+        System.out.println("\t\t\t6. Most assigned problem.");
+        System.out.println("\t\t\t0. Back.");
+        System.out.print("\t\t\t\tInput an option: ");
+    }
+    private void printGradingMenu()
+    {
+        System.out.println("\n\n\t\t\t1. Add a grading.");
+        System.out.println("\t\t\t2. Delete a grading.");
+        System.out.println("\t\t\t3. Update a grading.");
+        System.out.println("\t\t\t4. Print all gradings.");
+        System.out.println("\t\t\t5. Filter gradings by assign ID.");
         System.out.println("\t\t\t0. Back.");
         System.out.print("\t\t\t\tInput an option: ");
     }
@@ -316,6 +350,10 @@ public class Console
 
     //=========================ASSIGN==================================
 
+    private void mostAssigned()
+    {
+        System.out.println(problemService.getProblem(Long.valueOf(assignService.mostAssigned())));
+    }
     private void filterAssign()
     {
         BufferedReader bufferRead = new BufferedReader(new InputStreamReader(System.in));
@@ -408,6 +446,97 @@ public class Console
         catch (ValidatorException e)
         {
             System.out.println(e.getMessage());
+        }
+    }
+
+    //============================Gradings================================
+    private Grading readGrading()
+    {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        try
+        {
+            System.out.print("\nID: ");
+            Long id = Long.valueOf(br.readLine());
+
+            System.out.print("Assign ID: ");
+            String AID = br.readLine();
+
+            System.out.print("Grade: ");
+            String gr = br.readLine();
+            int grade=Integer.parseInt(gr);
+
+            Grading grading = new Grading(AID, grade);
+            grading.setId(id);
+
+            return grading;
+        }
+        catch(Exception ex)
+        {
+            System.out.println(ex.getMessage());
+        }
+        return null;
+    }
+    private void printAllGradings()
+    {
+        System.out.println("\n");
+        Set<Grading> gradings = gradingService.getAllGradings();
+        gradings.stream().forEach(System.out::println);
+    }
+    private void filterGradings()
+    {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        try
+        {
+            System.out.println("\nAssign ID:");
+            String AID = br.readLine();
+            Set<Grading> gradings = gradingService.filterGradingsByAID(AID);
+            gradings.stream().forEach(System.out::println);
+        }
+        catch(Exception ex)
+        {
+            System.out.println(ex.getMessage());
+        }
+    }
+    private void addGrading()
+    {
+       Grading grading = readGrading();
+       try
+       {
+           gradingService.addGrading(grading);
+           System.out.println("Grading added!\n");
+       }
+       catch(ValidatorException ex)
+       {
+           System.out.println(ex.getMessage());
+       }
+    }
+    private void deleteGrading()
+    {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        try
+        {
+            System.out.println("Grading ID: ");
+            String id1=br.readLine();
+            Long id=Long.valueOf(id1);
+            gradingService.deleteGrading(id);
+            System.out.println("Grading deleted!\n");
+        }
+        catch(Exception ex)
+        {
+            System.out.println(ex.getMessage());
+        }
+    }
+    private void updateGrading()
+    {
+        Grading grading = readGrading();
+        try
+        {
+            gradingService.updateGrading(grading);
+            System.out.println("Grading updated!\n");
+        }
+        catch(Exception ex)
+        {
+            System.out.println(ex.getMessage());
         }
     }
 }
