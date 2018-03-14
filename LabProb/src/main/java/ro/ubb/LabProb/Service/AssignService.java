@@ -9,30 +9,32 @@ import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
-public class AssignService
-{
+public class AssignService {
     private Repository<Long, Assign> repository;
 
-    public AssignService(Repository<Long, Assign> repository)
-    {
+    public AssignService(Repository<Long, Assign> repository) {
         this.repository = repository;
     }
 
 
-    public void addAssign(Assign assign) throws ValidatorException { repository.save(assign); }
+    public void addAssign(Assign assign) throws ValidatorException {
+        repository.save(assign);
+    }
 
-    public void deleteAssign(Long id) throws ValidatorException { repository.delete(id); }
+    public void deleteAssign(Long id) throws ValidatorException {
+        repository.delete(id);
+    }
 
-    public void updateAssign(Assign assign) throws ValidatorException { repository.update(assign); }
+    public void updateAssign(Assign assign) throws ValidatorException {
+        repository.update(assign);
+    }
 
-    public Set<Assign> getAllAssigns()
-    {
+    public Set<Assign> getAllAssigns() {
         Iterable<Assign> assigns = repository.findAll();
         return StreamSupport.stream(assigns.spliterator(), false).collect(Collectors.toSet());
     }
 
-    public Set<Assign> filterAssignsBySID(String s)
-    {
+    public Set<Assign> filterAssignsBySID(String s) {
         Iterable<Assign> assigns = repository.findAll();
 
         Set<Assign> filteredAssigns = new HashSet<>();
@@ -41,11 +43,11 @@ public class AssignService
 
         return filteredAssigns;
     }
-    public String mostAssigned()
-    {
-        Iterable<Assign> assigns=repository.findAll();
-        List<String> problems=new ArrayList<>();
-        problems=StreamSupport.stream(assigns.spliterator(),false).map(p->p.getPID()).collect(Collectors.toList());
+
+    public String mostAssigned() {
+        Iterable<Assign> assigns = repository.findAll();
+        List<String> problems = new ArrayList<>();
+        problems = StreamSupport.stream(assigns.spliterator(), false).map(p -> p.getPID()).collect(Collectors.toList());
         Map<String, Long> counts =
                 problems.stream().collect(Collectors.groupingBy(e -> e, Collectors.counting()));
         return counts.entrySet().stream().max((entry1, entry2) -> entry1.getValue() > entry2.getValue() ? 1 : -1).get().getKey();

@@ -93,7 +93,7 @@ public class AssignFileRepository extends InMemoryRepository<Long, Assign> {
         }
     }
 
-    private void deleteFromFile(Assign std) {
+    private void deleteFromFile(Assign asg) {
         try {
             PrintWriter writer = new PrintWriter(fileName);
             writer.close();
@@ -102,7 +102,7 @@ public class AssignFileRepository extends InMemoryRepository<Long, Assign> {
         }
         Path path = Paths.get(fileName);
         super.findAll().forEach(assign -> {
-            if (!assign.equals(std)) {
+            if (assign.getId() != asg.getId()) {
                 try (BufferedWriter bufferedWriter = Files.newBufferedWriter(path, StandardOpenOption.APPEND)) {
                     bufferedWriter.newLine();
                     bufferedWriter.write(assign.getId() + "," + assign.getSID() + "," + assign.getPID());

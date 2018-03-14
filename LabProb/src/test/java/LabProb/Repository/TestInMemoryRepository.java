@@ -9,8 +9,6 @@ import ro.ubb.LabProb.Domain.Validator.Validator;
 import ro.ubb.LabProb.Domain.Validator.ValidatorException;
 import ro.ubb.LabProb.Repository.InMemoryRepository;
 import ro.ubb.LabProb.Repository.Repository;
-
-import java.util.Iterator;
 import java.util.Optional;
 
 import static org.junit.Assert.assertEquals;
@@ -95,14 +93,14 @@ public class TestInMemoryRepository {
 
     @Test(expected = ValidatorException.class)
     public void testUpdateException() throws Exception {
-        Student s2 = new Student("11","Chowder");
+        Student s2 = new Student("11", "Chowder");
         s2.setId(new Long(5));
         studentRepository.update(s2);
     }
 
     @Test(expected = ValidatorException.class)
     public void testDeleteException() throws Exception {
-        Student s2 = new Student("11","Chowder");
+        Student s2 = new Student("11", "Chowder");
         s2.setId(new Long(5));
         studentRepository.delete(s2.getId());
     }

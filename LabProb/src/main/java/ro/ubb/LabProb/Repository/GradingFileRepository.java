@@ -93,7 +93,7 @@ public class GradingFileRepository extends InMemoryRepository<Long, Grading> {
         }
     }
 
-    private void deleteFromFile(Grading std) {
+    private void deleteFromFile(Grading gr) {
         try {
             PrintWriter writer = new PrintWriter(fileName);
             writer.close();
@@ -102,7 +102,7 @@ public class GradingFileRepository extends InMemoryRepository<Long, Grading> {
         }
         Path path = Paths.get(fileName);
         super.findAll().forEach(grading -> {
-            if (!grading.equals(std)) {
+            if (grading.getId() != gr.getId()) {
                 try (BufferedWriter bufferedWriter = Files.newBufferedWriter(path, StandardOpenOption.APPEND)) {
                     bufferedWriter.newLine();
                     bufferedWriter.write(grading.getId() + "," + grading.getAID() + "," + grading.getGrade());

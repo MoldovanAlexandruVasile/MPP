@@ -12,10 +12,8 @@ import ro.ubb.LabProb.Service.ProblemService;
 import ro.ubb.LabProb.Service.StudentService;
 import ro.ubb.LabProb.UI.Console;
 
-public class Main
-{
-    public static void main(String args[])
-    {
+public class Main {
+    public static void main(String args[]) {
 
         Validator<Student> studentValidator = new StudentValidator();
         //Repository<Long, Student> studentRepository = new InMemoryRepository<>(studentValidator);
@@ -38,16 +36,15 @@ public class Main
         Validator<Grading> gradingValidator = new GradingValidator();
         //Repository<Long,Grading> gradingRepository = new InMemoryRepository<>(gradingValidator);
         GradingFileRepository gradingRepository = new GradingFileRepository(gradingValidator, "E:\\Programe\\IntelliJ IDEA 2017.2.5\\Projects\\MPP\\LabProb\\src\\main\\java\\ro\\ubb\\LabProb\\DataFileRepository\\GradingFileRepository.txt");
-        GradingService gradingService=new GradingService(gradingRepository);
+        GradingService gradingService = new GradingService(gradingRepository);
         //populateGradingRepo(gradingService);
 
 
-        Console console = new Console(studentService, problemService, assignService,gradingService);
+        Console console = new Console(studentService, problemService, assignService, gradingService);
         console.runConsole();
     }
 
-    private static void populateStudentRepo(StudentService ss)
-    {
+    private static void populateStudentRepo(StudentService ss) {
         Student s1 = new Student("2172", "Alex");
         s1.setId(new Long(1));
 
@@ -62,8 +59,7 @@ public class Main
         ss.addStudent(s3);
     }
 
-    private static void populateProblemRepo(ProblemService ps)
-    {
+    private static void populateProblemRepo(ProblemService ps) {
         Problem p1 = new Problem("Ana are mere. Cate pere are ana?");
         p1.setId(new Long(1));
 
@@ -78,32 +74,33 @@ public class Main
         ps.addProblem(p3);
     }
 
-    private static void populateAssignRepo(AssignService as)
-    {
-        Assign a1 = new Assign("1","2");
+    private static void populateAssignRepo(AssignService as) {
+        Assign a1 = new Assign("1", "2");
         a1.setId(new Long(1));
 
-        Assign a2 = new Assign("2","1");
+        Assign a2 = new Assign("2", "1");
         a2.setId(new Long(2));
 
-        Assign a3 = new Assign("3","3");
+        Assign a3 = new Assign("3", "3");
         a3.setId(new Long(3));
 
         as.addAssign(a1);
         as.addAssign(a2);
         as.addAssign(a3);
     }
-    private static void populateGradingRepo(GradingService gs)
-    {
-        Grading g1=new Grading("1",9);
+
+    private static void populateGradingRepo(GradingService gs) {
+        Grading g1 = new Grading("1", 9);
         g1.setId(new Long(1));
 
-        Grading g2= new Grading("2",7);
+        Grading g2 = new Grading("2", 7);
         g2.setId(new Long(2));
 
-        Grading g3= new Grading("3",4);
+        Grading g3 = new Grading("3", 4);
         g3.setId(new Long(3));
 
-        gs.addGrading(g1);gs.addGrading(g2);gs.addGrading(g3);
+        gs.addGrading(g1);
+        gs.addGrading(g2);
+        gs.addGrading(g3);
     }
 }

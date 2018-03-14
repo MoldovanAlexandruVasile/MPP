@@ -103,7 +103,7 @@ public class StudentFileRepository extends InMemoryRepository<Long, Student> {
         }
         Path path = Paths.get(fileName);
         super.findAll().forEach(student -> {
-            if (!student.equals(std)) {
+            if (student.getId() != std.getId()) {
                 try (BufferedWriter bufferedWriter = Files.newBufferedWriter(path, StandardOpenOption.APPEND)) {
                     bufferedWriter.newLine();
                     bufferedWriter.write(student.getId() + "," + student.getSerialNumber() + "," + student.getName());

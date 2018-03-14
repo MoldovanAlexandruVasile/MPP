@@ -3,6 +3,7 @@ package ro.ubb.LabProb.Repository;
 import ro.ubb.LabProb.Domain.Problem;
 import ro.ubb.LabProb.Domain.Validator.Validator;
 import ro.ubb.LabProb.Domain.Validator.ValidatorException;
+
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -92,7 +93,7 @@ public class ProblemFileRepository extends InMemoryRepository<Long, Problem> {
         }
     }
 
-    private void deleteFromFile(Problem std) {
+    private void deleteFromFile(Problem pr) {
         try {
             PrintWriter writer = new PrintWriter(fileName);
             writer.close();
@@ -101,7 +102,7 @@ public class ProblemFileRepository extends InMemoryRepository<Long, Problem> {
         }
         Path path = Paths.get(fileName);
         super.findAll().forEach(problem -> {
-            if (!problem.equals(std)) {
+            if (problem.getId() != pr.getId()) {
                 try (BufferedWriter bufferedWriter = Files.newBufferedWriter(path, StandardOpenOption.APPEND)) {
                     bufferedWriter.newLine();
                     bufferedWriter.write(problem.getId() + "," + problem.getDescription());

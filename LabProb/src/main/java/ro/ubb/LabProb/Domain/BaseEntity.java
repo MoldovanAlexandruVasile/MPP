@@ -1,7 +1,6 @@
 package ro.ubb.LabProb.Domain;
 
-public class BaseEntity<ID>
-{
+public class BaseEntity<ID> {
     private ID id;
 
     public ID getId() {
@@ -13,8 +12,7 @@ public class BaseEntity<ID>
     }
 
     @Override
-    public String toString()
-    {
+    public String toString() {
         return "BaseEntity{" + "ID = " + id + '}';
     }
 }
