@@ -1,9 +1,8 @@
 package ro.ubb.LabProb.Repository;
 
-import ro.ubb.LabProb.Domain.Student;
+import ro.ubb.LabProb.Domain.Problem;
 import ro.ubb.LabProb.Domain.Validator.Validator;
 import ro.ubb.LabProb.Domain.Validator.ValidatorException;
-
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -15,10 +14,10 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
-public class StudentFileRepository extends InMemoryRepository<Long, Student> {
+public class ProblemFileRepository extends InMemoryRepository<Long, Problem> {
     private String fileName;
 
-    public StudentFileRepository(Validator<Student> validator, String fileName) {
+    public ProblemFileRepository(Validator<Problem> validator, String fileName) {
         super(validator);
         this.fileName = fileName;
         loadData();
@@ -33,14 +32,13 @@ public class StudentFileRepository extends InMemoryRepository<Long, Student> {
                 List<String> items = Arrays.asList(line.split(","));
 
                 Long id = Long.valueOf(items.get(0));
-                String serialNumber = items.get(1);
-                String name = items.get((2));
+                String description = items.get(1);
 
-                Student student = new Student(serialNumber, name);
-                student.setId(id);
+                Problem problem = new Problem(description);
+                problem.setId(id);
 
                 try {
-                    super.save(student);
+                    super.save(problem);
                 } catch (ValidatorException e) {
                     e.printStackTrace();
                 }
@@ -51,8 +49,8 @@ public class StudentFileRepository extends InMemoryRepository<Long, Student> {
     }
 
     @Override
-    public Optional<Student> save(Student entity) throws ValidatorException {
-        Optional<Student> optional = super.save(entity);
+    public Optional<Problem> save(Problem entity) throws ValidatorException {
+        Optional<Problem> optional = super.save(entity);
         if (optional.isPresent()) {
             return optional;
         }
@@ -61,20 +59,20 @@ public class StudentFileRepository extends InMemoryRepository<Long, Student> {
     }
 
     @Override
-    public Optional<Student> delete(Long id) throws ValidatorException {
-        Optional<Student> op = super.findOne(id);
-        Student std = op.get();
-        Optional<Student> optional = super.delete(id);
+    public Optional<Problem> delete(Long id) throws ValidatorException {
+        Optional<Problem> op = super.findOne(id);
+        Problem prb = op.get();
+        Optional<Problem> optional = super.delete(id);
         if (!optional.isPresent()) {
             return optional;
         }
-        deleteFromFile(std);
+        deleteFromFile(prb);
         return Optional.empty();
     }
 
     @Override
-    public Optional<Student> update(Student entity) throws ValidatorException {
-        Optional<Student> optional = super.findOne(entity.getId());
+    public Optional<Problem> update(Problem entity) throws ValidatorException {
+        Optional<Problem> optional = super.findOne(entity.getId());
         if (!optional.isPresent()) {
             return optional;
         }
@@ -84,17 +82,17 @@ public class StudentFileRepository extends InMemoryRepository<Long, Student> {
         return Optional.empty();
     }
 
-    private void saveToFile(Student entity) {
+    private void saveToFile(Problem entity) {
         Path path = Paths.get(fileName);
         try (BufferedWriter bufferedWriter = Files.newBufferedWriter(path, StandardOpenOption.APPEND)) {
             bufferedWriter.newLine();
-            bufferedWriter.write(entity.getId() + "," + entity.getSerialNumber() + "," + entity.getName());
+            bufferedWriter.write(entity.getId() + "," + entity.getDescription());
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    private void deleteFromFile(Student std) {
+    private void deleteFromFile(Problem std) {
         try {
             PrintWriter writer = new PrintWriter(fileName);
             writer.close();
@@ -102,11 +100,11 @@ public class StudentFileRepository extends InMemoryRepository<Long, Student> {
             e.printStackTrace();
         }
         Path path = Paths.get(fileName);
-        super.findAll().forEach(student -> {
-            if (!student.equals(std)) {
+        super.findAll().forEach(problem -> {
+            if (!problem.equals(std)) {
                 try (BufferedWriter bufferedWriter = Files.newBufferedWriter(path, StandardOpenOption.APPEND)) {
                     bufferedWriter.newLine();
-                    bufferedWriter.write(student.getId() + "," + student.getSerialNumber() + "," + student.getName());
+                    bufferedWriter.write(problem.getId() + "," + problem.getDescription());
                 } catch (IOException e) {
                     e.printStackTrace();
                 }

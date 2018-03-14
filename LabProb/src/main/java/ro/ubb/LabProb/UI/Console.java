@@ -503,7 +503,7 @@ public class Console
        try
        {
            gradingService.addGrading(grading);
-           System.out.println("Grading added!\n");
+           System.out.println("\tGrading added!");
        }
        catch(ValidatorException ex)
        {
@@ -519,7 +519,7 @@ public class Console
             String id1=br.readLine();
             Long id=Long.valueOf(id1);
             gradingService.deleteGrading(id);
-            System.out.println("Grading deleted!\n");
+            System.out.println("\tGrading deleted!\n");
         }
         catch(Exception ex)
         {
@@ -532,7 +532,7 @@ public class Console
         try
         {
             gradingService.updateGrading(grading);
-            System.out.println("Grading updated!\n");
+            System.out.println("\tGrading updated!\n");
         }
         catch(Exception ex)
         {

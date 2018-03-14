@@ -1,6 +1,6 @@
 package ro.ubb.LabProb.Domain.Validator;
 
-public class ValidatorException extends AssignException
+public class ValidatorException extends RuntimeException
 {
     public ValidatorException(String message){ super(message); }
 

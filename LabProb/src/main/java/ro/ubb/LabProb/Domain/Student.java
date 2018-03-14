@@ -1,12 +1,10 @@
 package ro.ubb.LabProb.Domain;
 
-public class Student extends ro.ubb.LabProb.Domain.BaseEntity<Long>
-{
+public class Student extends ro.ubb.LabProb.Domain.BaseEntity<Long> {
     private String serialNumber;
     private String name;
 
-    public Student(String serialNumber, String name)
-    {
+    public Student(String serialNumber, String name) {
         this.serialNumber = serialNumber;
         this.name = name;
     }
@@ -28,8 +26,7 @@ public class Student extends ro.ubb.LabProb.Domain.BaseEntity<Long>
     }
 
     @Override
-    public boolean equals(Object o)
-    {
+    public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass())
             return false;
@@ -43,16 +40,14 @@ public class Student extends ro.ubb.LabProb.Domain.BaseEntity<Long>
     }
 
     @Override
-    public int hashCode()
-    {
+    public int hashCode() {
         int result = serialNumber.hashCode();
         result = 31 * result + name.hashCode();
         return result;
     }
 
     @Override
-    public String toString()
-    {
+    public String toString() {
         return "Student{" + "serialNumber = " + serialNumber + ' ' + ", name = " + name + "} " + super.toString();
     }
 }

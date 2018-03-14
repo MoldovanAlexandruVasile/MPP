@@ -1,0 +1,3 @@
+3,Diagonala unui trapez este?
+1,Ana are mere. Cate pere are Ana?
+2,Diagonala unui patrat este?
