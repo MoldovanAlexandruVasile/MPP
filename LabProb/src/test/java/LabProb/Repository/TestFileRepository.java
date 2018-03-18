@@ -7,36 +7,69 @@ import ro.ubb.LabProb.Domain.Student;
 import ro.ubb.LabProb.Domain.Validator.StudentValidator;
 import ro.ubb.LabProb.Domain.Validator.Validator;
 import ro.ubb.LabProb.Domain.Validator.ValidatorException;
-import ro.ubb.LabProb.Repository.Repository;
-import ro.ubb.LabProb.Repository.StudentFileRepository;
-import java.util.Optional;
+import ro.ubb.LabProb.Repository.FileRepository.StudentFileRepository;
+import java.util.NoSuchElementException;
 import static org.junit.Assert.assertEquals;
 
 public class TestFileRepository {
     private Validator<Student> studentValidator = new StudentValidator();
-    StudentFileRepository studentRepository = new StudentFileRepository(studentValidator, "E:\\Programe\\IntelliJ IDEA 2017.2.5\\Projects\\MPP\\LabProb\\src\\main\\java\\ro\\ubb\\LabProb\\DataFileRepository\\StudentFileRepository.txt");
-    private static final Long ID = new Long(1);
-    private static final Long NEW_ID = new Long(2);
-    private static final String SERIAL_NUMBER = "1";
-    private static final String NEW_SERIAL_NUMBER = "2";
-    private static final String NAME = "Name";
-    private static final String NEW_NAME = "Name2";
-    private Student student;
+    private StudentFileRepository studentFileRepository;
 
     @Before
     public void setUp() throws Exception {
-        student = new Student(SERIAL_NUMBER, NAME);
-        student.setId(ID);
-        studentRepository.save(student);
+        studentFileRepository = new StudentFileRepository(studentValidator, "E:\\Programe\\IntelliJ IDEA 2017.2.5\\Projects\\MPP\\LabProb\\src\\test\\java\\LabProb\\TestFiles\\StudentFileRepository.txt");
     }
 
     @After
     public void tearDown() throws Exception {
-        studentRepository = null;
+        studentFileRepository = null;
     }
 
     @Test
     public void testLoadData() throws Exception {
+        assertEquals("The size should be the same !", studentFileRepository.findAll().spliterator().getExactSizeIfKnown(), 4);
+    }
 
+    @Test
+    public void testSave() throws Exception {
+        Student std = new Student("2190", "Mihaela");
+        std.setId(new Long(5));
+        studentFileRepository.save(std);
+        assertEquals("The size should be the same !", studentFileRepository.findAll().spliterator().getExactSizeIfKnown(), 5);
+    }
+
+    @Test
+    public void testDelete() throws Exception {
+        studentFileRepository.delete(new Long(5));
+        assertEquals("The size should be the same !", studentFileRepository.findOne(new Long(5)).isPresent(), false);
+    }
+
+    @Test
+    public void testUpdate() throws Exception {
+        Student std = new Student("1", "Ana");
+        std.setId(new Long(8));
+        assertEquals("The element shouldn't be present in repo !", studentFileRepository.update(std).isPresent(), false);
+    }
+
+    @Test
+    public void testUpdateUndone() throws Exception {
+        Student std = new Student("1111", "AAAA");
+        std.setId(new Long(10));
+        studentFileRepository.update(std);
+        assertEquals("The element should not be updated !", studentFileRepository.findOne(std.getId()).isPresent(), false);
+    }
+
+    @Test(expected = NoSuchElementException.class)
+    public void testDeleteException() throws Exception {
+        studentFileRepository.delete(new Long(5));
+        assertEquals("The size should be the same !", studentFileRepository.findOne(new Long(5)).isPresent(), false);
+    }
+
+    @Test(expected = ValidatorException.class)
+    public void testSaveException() throws Exception {
+        Student std = new Student("2172", "Alex");
+        std.setId(new Long(1));
+        studentFileRepository.save(std);
+        assertEquals("The size should be the same !", studentFileRepository.findAll().spliterator().getExactSizeIfKnown(), 5);
     }
 }

@@ -93,7 +93,7 @@ public class Console {
         System.out.println("\t2. Problem operations.");
         System.out.println("\t3. Assign operations.");
         System.out.println("\t4. Grading operations.");
-        System.out.println("\t0. Exit.");
+        System.out.println("\t0. Back.");
         System.out.print("\t\tInput an option: ");
     }
 

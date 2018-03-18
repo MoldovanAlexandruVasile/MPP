@@ -1,8 +1,9 @@
-package ro.ubb.LabProb.Repository;
+package ro.ubb.LabProb.Repository.FileRepository;
 
 import ro.ubb.LabProb.Domain.Problem;
 import ro.ubb.LabProb.Domain.Validator.Validator;
 import ro.ubb.LabProb.Domain.Validator.ValidatorException;
+import ro.ubb.LabProb.Repository.InMemoryRepository;
 
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -30,18 +31,20 @@ public class ProblemFileRepository extends InMemoryRepository<Long, Problem> {
         try {
             Files.lines(path).forEach(line ->
             {
-                List<String> items = Arrays.asList(line.split(","));
+                if (!line.isEmpty()) {
+                    List<String> items = Arrays.asList(line.split(","));
 
-                Long id = Long.valueOf(items.get(0));
-                String description = items.get(1);
+                    Long id = Long.valueOf(items.get(0));
+                    String description = items.get(1);
 
-                Problem problem = new Problem(description);
-                problem.setId(id);
+                    Problem problem = new Problem(description);
+                    problem.setId(id);
 
-                try {
-                    super.save(problem);
-                } catch (ValidatorException e) {
-                    e.printStackTrace();
+                    try {
+                        super.save(problem);
+                    } catch (ValidatorException e) {
+                        e.printStackTrace();
+                    }
                 }
             });
         } catch (IOException ex) {
@@ -86,8 +89,7 @@ public class ProblemFileRepository extends InMemoryRepository<Long, Problem> {
     private void saveToFile(Problem entity) {
         Path path = Paths.get(fileName);
         try (BufferedWriter bufferedWriter = Files.newBufferedWriter(path, StandardOpenOption.APPEND)) {
-            bufferedWriter.newLine();
-            bufferedWriter.write(entity.getId() + "," + entity.getDescription());
+            bufferedWriter.write("\n" + entity.getId() + "," + entity.getDescription());
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -104,8 +106,7 @@ public class ProblemFileRepository extends InMemoryRepository<Long, Problem> {
         super.findAll().forEach(problem -> {
             if (problem.getId() != pr.getId()) {
                 try (BufferedWriter bufferedWriter = Files.newBufferedWriter(path, StandardOpenOption.APPEND)) {
-                    bufferedWriter.newLine();
-                    bufferedWriter.write(problem.getId() + "," + problem.getDescription());
+                    bufferedWriter.write(problem.getId() + "," + problem.getDescription() + "\n" );
                 } catch (IOException e) {
                     e.printStackTrace();
                 }

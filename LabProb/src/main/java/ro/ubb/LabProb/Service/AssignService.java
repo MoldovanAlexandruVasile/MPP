@@ -48,8 +48,7 @@ public class AssignService {
         Iterable<Assign> assigns = repository.findAll();
         List<String> problems = new ArrayList<>();
         problems = StreamSupport.stream(assigns.spliterator(), false).map(p -> p.getPID()).collect(Collectors.toList());
-        Map<String, Long> counts =
-                problems.stream().collect(Collectors.groupingBy(e -> e, Collectors.counting()));
+        Map<String, Long> counts = problems.stream().collect(Collectors.groupingBy(e -> e, Collectors.counting()));
         return counts.entrySet().stream().max((entry1, entry2) -> entry1.getValue() > entry2.getValue() ? 1 : -1).get().getKey();
     }
 }

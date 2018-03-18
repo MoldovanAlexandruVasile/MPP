@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Gradings xmlns="Gradings">
+    <Grading>
+        <ID>3</ID>
+        <AID>3</AID>
+        <Grade>4</Grade>
+    </Grading>
+    <Grading>
+        <ID>2</ID>
+        <AID>2</AID>
+        <Grade>7</Grade>
+    </Grading>
+    <Grading>
+        <ID>1</ID>
+        <AID>1</AID>
+        <Grade>9</Grade>
+    </Grading>
+</Gradings>

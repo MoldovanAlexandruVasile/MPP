@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Problems xmlns="Problems">
+    <Problem>
+        <ID>3</ID>
+        <Description>Diagonala unui trapez este?</Description>
+    </Problem>
+    <Problem>
+        <ID>1</ID>
+        <Description>Ana are mere. Cate pere are Ana?</Description>
+    </Problem>
+    <Problem>
+        <ID>2</ID>
+        <Description>Diagonala unui patrat este?</Description>
+    </Problem>
+</Problems>

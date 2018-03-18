@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Assigns xmlns="Assigns">
+    <Assign>
+        <ID>1</ID>
+        <SID>1</SID>
+        <PID>2</PID>
+    </Assign>
+    <Assign>
+        <ID>2</ID>
+        <SID>2</SID>
+        <PID>1</PID>
+    </Assign>
+    <Assign>
+        <ID>3</ID>
+        <SID>3</SID>
+        <PID>3</PID>
+    </Assign>
+</Assigns>

@@ -1,8 +1,10 @@
-package ro.ubb.LabProb.Repository;
+package ro.ubb.LabProb.Repository.FileRepository;
 
-import ro.ubb.LabProb.Domain.Grading;
+import ro.ubb.LabProb.Domain.Assign;
 import ro.ubb.LabProb.Domain.Validator.Validator;
 import ro.ubb.LabProb.Domain.Validator.ValidatorException;
+import ro.ubb.LabProb.Repository.InMemoryRepository;
+
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -14,10 +16,10 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
-public class GradingFileRepository extends InMemoryRepository<Long, Grading> {
+public class AssignFileRepository extends InMemoryRepository<Long, Assign> {
     private String fileName;
 
-    public GradingFileRepository(Validator<Grading> validator, String fileName) {
+    public AssignFileRepository(Validator<Assign> validator, String fileName) {
         super(validator);
         this.fileName = fileName;
         loadData();
@@ -29,19 +31,21 @@ public class GradingFileRepository extends InMemoryRepository<Long, Grading> {
         try {
             Files.lines(path).forEach(line ->
             {
-                List<String> items = Arrays.asList(line.split(","));
+                if (!line.isEmpty()) {
+                    List<String> items = Arrays.asList(line.split(","));
 
-                Long id = Long.valueOf(items.get(0));
-                String AID = items.get(1);
-                Integer gr = Integer.valueOf(items.get(2));
+                    Long id = Long.valueOf(items.get(0));
+                    String SID = items.get(1);
+                    String PID = items.get(2);
 
-                Grading problem = new Grading(AID, gr);
-                problem.setId(id);
+                    Assign problem = new Assign(SID, PID);
+                    problem.setId(id);
 
-                try {
-                    super.save(problem);
-                } catch (ValidatorException e) {
-                    e.printStackTrace();
+                    try {
+                        super.save(problem);
+                    } catch (ValidatorException e) {
+                        e.printStackTrace();
+                    }
                 }
             });
         } catch (IOException ex) {
@@ -50,8 +54,8 @@ public class GradingFileRepository extends InMemoryRepository<Long, Grading> {
     }
 
     @Override
-    public Optional<Grading> save(Grading entity) throws ValidatorException {
-        Optional<Grading> optional = super.save(entity);
+    public Optional<Assign> save(Assign entity) throws ValidatorException {
+        Optional<Assign> optional = super.save(entity);
         if (optional.isPresent()) {
             return optional;
         }
@@ -60,10 +64,10 @@ public class GradingFileRepository extends InMemoryRepository<Long, Grading> {
     }
 
     @Override
-    public Optional<Grading> delete(Long id) throws ValidatorException {
-        Optional<Grading> op = super.findOne(id);
-        Grading asg = op.get();
-        Optional<Grading> optional = super.delete(id);
+    public Optional<Assign> delete(Long id) throws ValidatorException {
+        Optional<Assign> op = super.findOne(id);
+        Assign asg = op.get();
+        Optional<Assign> optional = super.delete(id);
         if (!optional.isPresent()) {
             return optional;
         }
@@ -72,8 +76,8 @@ public class GradingFileRepository extends InMemoryRepository<Long, Grading> {
     }
 
     @Override
-    public Optional<Grading> update(Grading entity) throws ValidatorException {
-        Optional<Grading> optional = super.findOne(entity.getId());
+    public Optional<Assign> update(Assign entity) throws ValidatorException {
+        Optional<Assign> optional = super.findOne(entity.getId());
         if (!optional.isPresent()) {
             return optional;
         }
@@ -83,17 +87,16 @@ public class GradingFileRepository extends InMemoryRepository<Long, Grading> {
         return Optional.empty();
     }
 
-    private void saveToFile(Grading entity) {
+    private void saveToFile(Assign entity) {
         Path path = Paths.get(fileName);
         try (BufferedWriter bufferedWriter = Files.newBufferedWriter(path, StandardOpenOption.APPEND)) {
-            bufferedWriter.newLine();
-            bufferedWriter.write(entity.getId() + "," + entity.getAID() + "," + entity.getGrade());
+            bufferedWriter.write("\n" + entity.getId() + "," + entity.getSID() + "," + entity.getPID());
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    private void deleteFromFile(Grading gr) {
+    private void deleteFromFile(Assign asg) {
         try {
             PrintWriter writer = new PrintWriter(fileName);
             writer.close();
@@ -101,11 +104,10 @@ public class GradingFileRepository extends InMemoryRepository<Long, Grading> {
             e.printStackTrace();
         }
         Path path = Paths.get(fileName);
-        super.findAll().forEach(grading -> {
-            if (grading.getId() != gr.getId()) {
+        super.findAll().forEach(assign -> {
+            if (assign.getId() != asg.getId()) {
                 try (BufferedWriter bufferedWriter = Files.newBufferedWriter(path, StandardOpenOption.APPEND)) {
-                    bufferedWriter.newLine();
-                    bufferedWriter.write(grading.getId() + "," + grading.getAID() + "," + grading.getGrade());
+                    bufferedWriter.write(assign.getId() + "," + assign.getSID() + "," + assign.getPID() + "\n" );
                 } catch (IOException e) {
                     e.printStackTrace();
                 }

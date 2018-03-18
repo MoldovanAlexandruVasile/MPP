@@ -5,43 +5,94 @@ import ro.ubb.LabProb.Domain.Grading;
 import ro.ubb.LabProb.Domain.Problem;
 import ro.ubb.LabProb.Domain.Student;
 import ro.ubb.LabProb.Domain.Validator.*;
-import ro.ubb.LabProb.Repository.*;
+import ro.ubb.LabProb.Repository.FileRepository.AssignFileRepository;
+import ro.ubb.LabProb.Repository.FileRepository.GradingFileRepository;
+import ro.ubb.LabProb.Repository.FileRepository.ProblemFileRepository;
+import ro.ubb.LabProb.Repository.FileRepository.StudentFileRepository;
+import ro.ubb.LabProb.Repository.InMemoryRepository;
+import ro.ubb.LabProb.Repository.Repository;
+import ro.ubb.LabProb.Repository.XMLRepository.XMLAssignRepository;
+import ro.ubb.LabProb.Repository.XMLRepository.XMLGradingRepository;
+import ro.ubb.LabProb.Repository.XMLRepository.XMLProblemRepository;
+import ro.ubb.LabProb.Repository.XMLRepository.XMLStudentRepository;
 import ro.ubb.LabProb.Service.AssignService;
 import ro.ubb.LabProb.Service.GradingService;
 import ro.ubb.LabProb.Service.ProblemService;
 import ro.ubb.LabProb.Service.StudentService;
 import ro.ubb.LabProb.UI.Console;
 
+import java.util.Scanner;
+
 public class Main {
     public static void main(String args[]) {
 
-        Validator<Student> studentValidator = new StudentValidator();
-        //Repository<Long, Student> studentRepository = new InMemoryRepository<>(studentValidator);
-        StudentFileRepository studentRepository = new StudentFileRepository(studentValidator, "E:\\Programe\\IntelliJ IDEA 2017.2.5\\Projects\\MPP\\LabProb\\src\\main\\java\\ro\\ubb\\LabProb\\DataFileRepository\\StudentFileRepository.txt");
-        StudentService studentService = new StudentService(studentRepository);
-        //populateStudentRepo(studentService);
+        while (true) {
+            Validator<Student> studentValidator = new StudentValidator();
+            Validator<Problem> problemValidator = new ProblemValidator();
+            Validator<Assign> assignValidator = new AssignValidator();
+            Validator<Grading> gradingValidator = new GradingValidator();
 
-        Validator<Problem> problemValidator = new ProblemValidator();
-        //Repository<Long, Problem> problemRepository = new InMemoryRepository<>(problemValidator);
-        ProblemFileRepository problemRepository = new ProblemFileRepository(problemValidator, "E:\\Programe\\IntelliJ IDEA 2017.2.5\\Projects\\MPP\\LabProb\\src\\main\\java\\ro\\ubb\\LabProb\\DataFileRepository\\ProblemFileRepository.txt");
-        ProblemService problemService = new ProblemService(problemRepository);
-        //populateProblemRepo(problemService);
+            System.out.println("\n\n1. In memory repo.");
+            System.out.println("2. .TXT files.");
+            System.out.println("3. .XML files.");
+            System.out.println("0. Exit.");
+            System.out.print("\tInput an option: ");
+            Scanner scan = new Scanner(System.in);
+            int s = scan.nextInt();
 
-        Validator<Assign> assignValidator = new AssignValidator();
-        //Repository<Long, Assign> assignRepository = new InMemoryRepository<>(assignValidator);
-        AssignFileRepository assignRepository = new AssignFileRepository(assignValidator, "E:\\Programe\\IntelliJ IDEA 2017.2.5\\Projects\\MPP\\LabProb\\src\\main\\java\\ro\\ubb\\LabProb\\DataFileRepository\\AssignFileRepository.txt");
-        AssignService assignService = new AssignService(assignRepository);
-        //populateAssignRepo(assignService);
+            if (s == 1) {
+                Repository<Long, Student> studentRepository = new InMemoryRepository<>(studentValidator);
+                StudentService studentService = new StudentService(studentRepository);
+                populateStudentRepo(studentService);
 
-        Validator<Grading> gradingValidator = new GradingValidator();
-        //Repository<Long,Grading> gradingRepository = new InMemoryRepository<>(gradingValidator);
-        GradingFileRepository gradingRepository = new GradingFileRepository(gradingValidator, "E:\\Programe\\IntelliJ IDEA 2017.2.5\\Projects\\MPP\\LabProb\\src\\main\\java\\ro\\ubb\\LabProb\\DataFileRepository\\GradingFileRepository.txt");
-        GradingService gradingService = new GradingService(gradingRepository);
-        //populateGradingRepo(gradingService);
+                Repository<Long, Problem> problemRepository = new InMemoryRepository<>(problemValidator);
+                ProblemService problemService = new ProblemService(problemRepository);
+                populateProblemRepo(problemService);
 
+                Repository<Long, Assign> assignRepository = new InMemoryRepository<>(assignValidator);
+                AssignService assignService = new AssignService(assignRepository);
+                populateAssignRepo(assignService);
 
-        Console console = new Console(studentService, problemService, assignService, gradingService);
-        console.runConsole();
+                Repository<Long, Grading> gradingRepository = new InMemoryRepository<>(gradingValidator);
+                GradingService gradingService = new GradingService(gradingRepository);
+                populateGradingRepo(gradingService);
+
+                Console console = new Console(studentService, problemService, assignService, gradingService);
+                console.runConsole();
+
+            } else if (s == 2) {
+                StudentFileRepository studentRepository = new StudentFileRepository(studentValidator, "E:\\Programe\\IntelliJ IDEA 2017.2.5\\Projects\\MPP\\LabProb\\src\\main\\java\\ro\\ubb\\LabProb\\DataFileRepository\\TXTFiles\\StudentFileRepository.txt");
+                StudentService studentService = new StudentService(studentRepository);
+
+                ProblemFileRepository problemRepository = new ProblemFileRepository(problemValidator, "E:\\Programe\\IntelliJ IDEA 2017.2.5\\Projects\\MPP\\LabProb\\src\\main\\java\\ro\\ubb\\LabProb\\DataFileRepository\\TXTFiles\\ProblemFileRepository.txt");
+                ProblemService problemService = new ProblemService(problemRepository);
+
+                AssignFileRepository assignRepository = new AssignFileRepository(assignValidator, "E:\\Programe\\IntelliJ IDEA 2017.2.5\\Projects\\MPP\\LabProb\\src\\main\\java\\ro\\ubb\\LabProb\\DataFileRepository\\TXTFiles\\AssignFileRepository.txt");
+                AssignService assignService = new AssignService(assignRepository);
+
+                GradingFileRepository gradingRepository = new GradingFileRepository(gradingValidator, "E:\\Programe\\IntelliJ IDEA 2017.2.5\\Projects\\MPP\\LabProb\\src\\main\\java\\ro\\ubb\\LabProb\\DataFileRepository\\TXTFiles\\GradingFileRepository.txt");
+                GradingService gradingService = new GradingService(gradingRepository);
+
+                Console console = new Console(studentService, problemService, assignService, gradingService);
+                console.runConsole();
+
+            } else if (s == 3) {
+                XMLStudentRepository xmlStudentRepository = new XMLStudentRepository(studentValidator, "E:\\Programe\\IntelliJ IDEA 2017.2.5\\Projects\\MPP\\LabProb\\src\\main\\java\\ro\\ubb\\LabProb\\DataFileRepository\\XMLFiles\\Students.xml");
+                StudentService studentService = new StudentService(xmlStudentRepository);
+
+                XMLProblemRepository xmlProblemRepository = new XMLProblemRepository(problemValidator, "E:\\Programe\\IntelliJ IDEA 2017.2.5\\Projects\\MPP\\LabProb\\src\\main\\java\\ro\\ubb\\LabProb\\DataFileRepository\\XMLFiles\\Problems.xml");
+                ProblemService problemService = new ProblemService(xmlProblemRepository);
+
+                XMLAssignRepository assignRepository = new XMLAssignRepository(assignValidator, "E:\\Programe\\IntelliJ IDEA 2017.2.5\\Projects\\MPP\\LabProb\\src\\main\\java\\ro\\ubb\\LabProb\\DataFileRepository\\XMLFiles\\Assigns.xml");
+                AssignService assignService = new AssignService(assignRepository);
+
+                XMLGradingRepository gradingRepository = new XMLGradingRepository(gradingValidator, "E:\\Programe\\IntelliJ IDEA 2017.2.5\\Projects\\MPP\\LabProb\\src\\main\\java\\ro\\ubb\\LabProb\\DataFileRepository\\XMLFiles\\Gradings.xml");
+                GradingService gradingService = new GradingService(gradingRepository);
+
+                Console console = new Console(studentService, problemService, assignService, gradingService);
+                console.runConsole();
+            } else break;
+        }
     }
 
     private static void populateStudentRepo(StudentService ss) {
