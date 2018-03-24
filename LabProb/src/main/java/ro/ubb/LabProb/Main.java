@@ -5,6 +5,11 @@ import ro.ubb.LabProb.Domain.Grading;
 import ro.ubb.LabProb.Domain.Problem;
 import ro.ubb.LabProb.Domain.Student;
 import ro.ubb.LabProb.Domain.Validator.*;
+import ro.ubb.LabProb.Repository.DataBase.AssignDatabase;
+import ro.ubb.LabProb.Repository.DataBase.GradingDatabase;
+import ro.ubb.LabProb.Repository.DataBase.ProblemDatabase;
+import ro.ubb.LabProb.Repository.DataBase.StudentDatabase;
+import ro.ubb.LabProb.Repository.DataBaseRepository;
 import ro.ubb.LabProb.Repository.FileRepository.AssignFileRepository;
 import ro.ubb.LabProb.Repository.FileRepository.GradingFileRepository;
 import ro.ubb.LabProb.Repository.FileRepository.ProblemFileRepository;
@@ -35,6 +40,7 @@ public class Main {
             System.out.println("\n\n1. In memory repo.");
             System.out.println("2. .TXT files.");
             System.out.println("3. .XML files.");
+            System.out.println("4. Database.");
             System.out.println("0. Exit.");
             System.out.print("\tInput an option: ");
             Scanner scan = new Scanner(System.in);
@@ -91,6 +97,21 @@ public class Main {
 
                 Console console = new Console(studentService, problemService, assignService, gradingService);
                 console.runConsole();
+            } else if (s == 4){
+                DataBaseRepository dataBaseRepository = new DataBaseRepository("School");
+
+                StudentDatabase studentDatabase = new StudentDatabase(dataBaseRepository);
+                ProblemDatabase problemDatabase = new ProblemDatabase(dataBaseRepository);
+                AssignDatabase assignDatabase = new AssignDatabase(dataBaseRepository);
+                GradingDatabase gradingDatabase = new GradingDatabase(dataBaseRepository);
+
+                StudentService studentService = new StudentService(studentDatabase);
+                ProblemService problemService = new ProblemService(problemDatabase);
+                AssignService assignService = new AssignService(assignDatabase);
+                GradingService gradingService = new GradingService(gradingDatabase);
+
+                Console console = new Console(studentService, problemService, assignService, gradingService);
+                console.runConsole();
             } else break;
         }
     }
@@ -99,7 +120,7 @@ public class Main {
         Student s1 = new Student("2172", "Alex");
         s1.setId(new Long(1));
 
-        Student s2 = new Student("2173", "Andree");
+        Student s2 = new Student("2173", "Andreea");
         s2.setId(new Long(2));
 
         Student s3 = new Student("2174", "Tudor");

@@ -14,6 +14,7 @@ import ro.ubb.LabProb.Service.StudentService;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Optional;
 import java.util.Scanner;
 import java.util.Set;
 
@@ -45,6 +46,7 @@ public class Console {
                     else if (s2 == 3) updateStudent();
                     else if (s2 == 4) printAllStudents();
                     else if (s2 == 5) filterStudents();
+                    else if (s2 == 6) studentLongName();
                     else if (s2 == 0) break;
                 }
             } else if (s == 2) {
@@ -103,6 +105,7 @@ public class Console {
         System.out.println("\t\t\t3. Update a student.");
         System.out.println("\t\t\t4. Print all students.");
         System.out.println("\t\t\t5. Filter students by name.");
+        System.out.println("\t\t\t6. Get longest student name.");
         System.out.println("\t\t\t0. Back.");
         System.out.print("\t\t\t\tInput an option: ");
     }
@@ -140,6 +143,13 @@ public class Console {
 
 
     //============================STUDENT================================
+    private void studentLongName() {
+        Set<Student> students = studentService.getAllStudents();
+        Optional<String> longestName = students.stream().map(student -> student.getName())
+                .reduce((student1, student2) -> student1.length() >= student2.length() ? student1 : student2);
+        System.out.println(longestName.toString());
+    }
+
     private void filterStudents() {
         BufferedReader bufferRead = new BufferedReader(new InputStreamReader(System.in));
         try {

@@ -4,5 +4,10 @@ ro.ubb.LabProb
 ro.ubb.LabProb.Domain
 ro.ubb.LabProb.Domain.Validator
 ro.ubb.LabProb.Repository
+ro.ubb.LabProb.Repository.DataBase
+ro.ubb.LabProb.Repository.FileRepository
+ro.ubb.LabProb.Repository.XMLRepository
+ro.ubb.LabProb.Repository.XMLRepository.Reader
+ro.ubb.LabProb.Repository.XMLRepository.Writer
 ro.ubb.LabProb.Service
 ro.ubb.LabProb.UI

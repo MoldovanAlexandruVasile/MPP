@@ -18,10 +18,6 @@ public class InMemoryRepository<ID, T extends BaseEntity<ID>> implements Reposit
         entities = new HashMap<>();
     }
 
-    public int getSize() {
-        return entities.size();
-    }
-
     @Override
     public Optional<T> findOne(ID id) {
         if (id == null) {

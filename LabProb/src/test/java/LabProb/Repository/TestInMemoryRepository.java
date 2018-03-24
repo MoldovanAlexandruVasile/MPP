@@ -37,11 +37,6 @@ public class TestInMemoryRepository {
     }
 
     @Test
-    public void testGetSize() throws Exception {
-        assertEquals("The size should be the same !", studentRepository.getSize(), 1);
-    }
-
-    @Test
     public void testFindOne() throws Exception {
         Optional<Student> op = studentRepository.findOne(student.getId());
         assertEquals("The student should be found in the repository !", student.toString(), op.get().toString());

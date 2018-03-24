@@ -1,0 +1,26 @@
+CREATE TABLE Students
+(
+	ID INT PRIMARY KEY,
+	SerialNumber VARCHAR(50),
+	Name VARCHAR(50)
+);
+
+CREATE TABLE Problems
+(
+	ID INT PRIMARY KEY,
+	Description VARCHAR(50)
+);
+
+CREATE TABLE Assigns
+(
+	ID INT PRIMARY KEY,
+	SID INT REFERENCES Students(ID),
+	PID INT REFERENCES Problems(ID)
+);
+
+CREATE TABLE Gradings
+(
+	ID INT PRIMARY KEY,
+	AID INT REFERENCES Assigns(ID),
+	Grade INT
+);

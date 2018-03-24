@@ -13,7 +13,7 @@ import static org.junit.Assert.assertEquals;
 
 public class TestXMLRepository {
     private Validator<Student> studentValidator = new StudentValidator();
-    XMLStudentRepository xmlStudentRepository;
+    private XMLStudentRepository xmlStudentRepository;
 
     @Before
     public void setUp() throws Exception {

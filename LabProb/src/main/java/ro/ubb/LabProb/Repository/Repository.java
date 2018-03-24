@@ -49,11 +49,4 @@ public interface Repository<ID, T extends BaseEntity<ID>> {
      * @throws ValidatorException       if the entity is not valid.
      */
     Optional<T> update(T entity) throws ValidatorException;
-
-    /**
-     * Getting the size of the repository
-     *
-     * @return an {@code Optional} - the dimension of the repository
-     */
-    int getSize();
 }
