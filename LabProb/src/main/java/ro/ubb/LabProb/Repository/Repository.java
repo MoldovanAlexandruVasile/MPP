@@ -1,7 +1,7 @@
 package ro.ubb.LabProb.Repository;
 
-import ro.ubb.LabProb.Domain.BaseEntity;
-import ro.ubb.LabProb.Domain.Validator.ValidatorException;
+import ro.ubb.socket.common.Domain.BaseEntity;
+import ro.ubb.socket.common.Domain.Validator.ValidatorException;
 
 import java.util.Optional;
 

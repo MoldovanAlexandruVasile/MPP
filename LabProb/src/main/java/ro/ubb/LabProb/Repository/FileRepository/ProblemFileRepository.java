@@ -1,8 +1,8 @@
 package ro.ubb.LabProb.Repository.FileRepository;
 
-import ro.ubb.LabProb.Domain.Problem;
-import ro.ubb.LabProb.Domain.Validator.Validator;
-import ro.ubb.LabProb.Domain.Validator.ValidatorException;
+import ro.ubb.socket.common.Domain.Problem;
+import ro.ubb.socket.common.Domain.Validator.Validator;
+import ro.ubb.socket.common.Domain.Validator.ValidatorException;
 import ro.ubb.LabProb.Repository.InMemoryRepository;
 
 import java.io.BufferedWriter;

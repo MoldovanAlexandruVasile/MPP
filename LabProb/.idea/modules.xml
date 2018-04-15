@@ -2,9 +2,21 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Client.iml" filepath="$PROJECT_DIR$/.idea/modules/Client.iml" group="Client" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Client/Client_main.iml" filepath="$PROJECT_DIR$/.idea/modules/Client/Client_main.iml" group="Client" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Client/Client_test.iml" filepath="$PROJECT_DIR$/.idea/modules/Client/Client_test.iml" group="Client" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Common.iml" filepath="$PROJECT_DIR$/.idea/modules/Common.iml" group="Common" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Common/Common_main.iml" filepath="$PROJECT_DIR$/.idea/modules/Common/Common_main.iml" group="Common" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Common/Common_test.iml" filepath="$PROJECT_DIR$/.idea/modules/Common/Common_test.iml" group="Common" />
       <module fileurl="file://$PROJECT_DIR$/LabProb.iml" filepath="$PROJECT_DIR$/LabProb.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Spring/LabProb-Spring_test.iml" filepath="$PROJECT_DIR$/.idea/modules/Spring/LabProb-Spring_test.iml" group="Spring" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/LabProb_main.iml" filepath="$PROJECT_DIR$/.idea/modules/LabProb_main.iml" group="LabProb" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/LabProb_test.iml" filepath="$PROJECT_DIR$/.idea/modules/LabProb_test.iml" group="LabProb" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Server.iml" filepath="$PROJECT_DIR$/.idea/modules/Server.iml" group="Server" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Server/Server_main.iml" filepath="$PROJECT_DIR$/.idea/modules/Server/Server_main.iml" group="Server" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Server/Server_test.iml" filepath="$PROJECT_DIR$/.idea/modules/Server/Server_test.iml" group="Server" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Spring/Spring_main.iml" filepath="$PROJECT_DIR$/.idea/modules/Spring/Spring_main.iml" group="Spring" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Spring/Spring_test.iml" filepath="$PROJECT_DIR$/.idea/modules/Spring/Spring_test.iml" group="Spring" />
     </modules>
   </component>
 </project>

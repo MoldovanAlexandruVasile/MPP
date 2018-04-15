@@ -1,15 +1,14 @@
 package ro.ubb.LabProb.UI;
 
-import ro.ubb.LabProb.Domain.Assign;
-import ro.ubb.LabProb.Domain.Grading;
-import ro.ubb.LabProb.Domain.Problem;
-import ro.ubb.LabProb.Domain.Student;
-import ro.ubb.LabProb.Domain.Validator.Validator;
-import ro.ubb.LabProb.Domain.Validator.ValidatorException;
-import ro.ubb.LabProb.Service.AssignService;
-import ro.ubb.LabProb.Service.GradingService;
-import ro.ubb.LabProb.Service.ProblemService;
-import ro.ubb.LabProb.Service.StudentService;
+import ro.ubb.socket.common.Domain.Assign;
+import ro.ubb.socket.common.Domain.Grading;
+import ro.ubb.socket.common.Domain.Problem;
+import ro.ubb.socket.common.Domain.Student;
+import ro.ubb.socket.common.Domain.Validator.ValidatorException;
+import ro.ubb.socket.server.service.AssignService;
+import ro.ubb.socket.server.service.GradingService;
+import ro.ubb.socket.server.service.ProblemService;
+import ro.ubb.socket.server.service.StudentService;
 
 import java.io.BufferedReader;
 import java.io.IOException;

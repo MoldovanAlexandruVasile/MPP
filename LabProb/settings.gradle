@@ -1,2 +1,5 @@
 rootProject.name = 'LabProb'
-
+include 'Server'
+include 'Common'
+include 'Client'
+include 'Spring'

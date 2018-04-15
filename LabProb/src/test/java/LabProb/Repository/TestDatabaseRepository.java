@@ -7,7 +7,7 @@ import ro.ubb.LabProb.Domain.Student;
 import ro.ubb.LabProb.Domain.Validator.StudentValidator;
 import ro.ubb.LabProb.Domain.Validator.Validator;
 import ro.ubb.LabProb.Domain.Validator.ValidatorException;
-import ro.ubb.LabProb.Repository.DataBase.StudentDatabase;
+import ro.ubb.socket.server.DataBase.StudentDatabase;
 import ro.ubb.LabProb.Repository.DataBaseRepository;
 
 import static org.junit.Assert.assertEquals;

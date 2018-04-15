@@ -2,7 +2,7 @@ package ro.ubb.LabProb.Repository.XMLRepository.Writer;
 
 import org.w3c.dom.*;
 import org.xml.sax.SAXException;
-import ro.ubb.LabProb.Domain.Student;
+import ro.ubb.socket.common.Domain.Student;
 
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;

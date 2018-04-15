@@ -5,9 +5,9 @@ import java.io.PrintWriter;
 import java.util.List;
 import java.util.Optional;
 
-import ro.ubb.LabProb.Domain.Assign;
-import ro.ubb.LabProb.Domain.Validator.Validator;
-import ro.ubb.LabProb.Domain.Validator.ValidatorException;
+import ro.ubb.socket.common.Domain.Assign;
+import ro.ubb.socket.common.Domain.Validator.Validator;
+import ro.ubb.socket.common.Domain.Validator.ValidatorException;
 import ro.ubb.LabProb.Repository.InMemoryRepository;
 import ro.ubb.LabProb.Repository.XMLRepository.Reader.XMLReaderAssign;
 import ro.ubb.LabProb.Repository.XMLRepository.Writer.XMLWriterAssign;
