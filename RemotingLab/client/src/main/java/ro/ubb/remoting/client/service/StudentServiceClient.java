@@ -12,10 +12,14 @@ public class StudentServiceClient implements StudentService {
     StudentService studentService;
 
     @Override
-    public Student findStudent(Long id) { return studentService.findStudent(id); }
+    public Student findStudent(Long id) {
+        return studentService.findStudent(id);
+    }
 
     @Override
-    public void addStudent(Student student) { studentService.addStudent(student); }
+    public void addStudent(Student student) {
+        studentService.addStudent(student);
+    }
 
     @Override
     public void updateStudent(Student student) {

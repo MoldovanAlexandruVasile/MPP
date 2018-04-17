@@ -32,11 +32,11 @@ public class StudentServiceServer implements StudentService {
 
         System.out.println("findStudent: ID = " + id);
 
-        Student book = studentRepo.findOne(id).get();
+        Student student = studentRepo.findOne(id).get();
 
-        System.out.println("findStudent: Student = " + book);
+        System.out.println("findStudent: Student = " + student);
 
-        return book;
+        return student;
 
     }
 

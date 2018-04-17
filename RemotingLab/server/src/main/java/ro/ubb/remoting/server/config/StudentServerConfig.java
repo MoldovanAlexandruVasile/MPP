@@ -7,7 +7,7 @@ import ro.ubb.remoting.common.StudentService;
 import ro.ubb.remoting.server.service.StudentServiceServer;
 
 @Configuration
-public class ServerConfig {
+public class StudentServerConfig {
     @Bean
     StudentService StudentService() {
         return new StudentServiceServer();
