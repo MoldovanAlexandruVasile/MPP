@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataSource name="SchoolJPA@localhost">
+  <database-model serializer="dbm" rdbms="POSTGRES" format-version="4.4">
+    <root id="1"/>
+    <database id="2" parent="1" name="SchoolJPA">
+      <ObjectId>16493</ObjectId>
+      <Current>1</Current>
+      <Visible>1</Visible>
+    </database>
+    <database id="3" parent="1" name="postgres">
+      <ObjectId>12938</ObjectId>
+    </database>
+    <database id="4" parent="1" name="School">
+      <ObjectId>16393</ObjectId>
+    </database>
+    <database id="5" parent="1" name="TestStudents">
+      <ObjectId>16459</ObjectId>
+    </database>
+    <schema id="6" parent="2" name="public">
+      <ObjectId>2200</ObjectId>
+      <IntrospectionTimestamp>2018-04-19.13:18:28.186</IntrospectionTimestamp>
+      <IntrospectionStateNumber>788</IntrospectionStateNumber>
+      <Current>1</Current>
+      <Visible>1</Visible>
+    </schema>
+    <schema id="7" parent="2" name="pg_catalog">
+      <ObjectId>11</ObjectId>
+    </schema>
+    <schema id="8" parent="2" name="pg_toast">
+      <ObjectId>99</ObjectId>
+    </schema>
+    <schema id="9" parent="2" name="pg_temp_1">
+      <ObjectId>11736</ObjectId>
+    </schema>
+    <schema id="10" parent="2" name="pg_toast_temp_1">
+      <ObjectId>11737</ObjectId>
+    </schema>
+    <schema id="11" parent="2" name="information_schema">
+      <ObjectId>12648</ObjectId>
+    </schema>
+    <sequence id="12" parent="6" name="hibernate_sequence">
+      <ObjectId>16507</ObjectId>
+      <StateNumber>788</StateNumber>
+    </sequence>
+    <table id="13" parent="6" name="problem">
+      <ObjectId>16494</ObjectId>
+      <StateNumber>786</StateNumber>
+    </table>
+    <table id="14" parent="6" name="student">
+      <ObjectId>16499</ObjectId>
+      <StateNumber>787</StateNumber>
+    </table>
+    <column id="15" parent="13" name="id">
+      <Position>1</Position>
+      <DataType>integer|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>786</StateNumber>
+    </column>
+    <column id="16" parent="13" name="description">
+      <Position>2</Position>
+      <DataType>varchar(255)|0</DataType>
+      <StateNumber>786</StateNumber>
+    </column>
+    <index id="17" parent="13" name="problem_pkey">
+      <ObjectId>16497</ObjectId>
+      <ColNames>id</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="18" parent="13" name="problem_pkey">
+      <ObjectId>16498</ObjectId>
+      <ColNames>id</ColNames>
+      <UnderlyingIndexName>problem_pkey</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <column id="19" parent="14" name="id">
+      <Position>1</Position>
+      <DataType>integer|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>787</StateNumber>
+    </column>
+    <column id="20" parent="14" name="name">
+      <Position>2</Position>
+      <DataType>varchar(255)|0</DataType>
+      <StateNumber>787</StateNumber>
+    </column>
+    <column id="21" parent="14" name="serialnumber">
+      <Position>3</Position>
+      <DataType>varchar(255)|0</DataType>
+      <StateNumber>787</StateNumber>
+    </column>
+    <index id="22" parent="14" name="student_pkey">
+      <ObjectId>16505</ObjectId>
+      <ColNames>id</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="23" parent="14" name="student_pkey">
+      <ObjectId>16506</ObjectId>
+      <ColNames>id</ColNames>
+      <UnderlyingIndexName>student_pkey</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+  </database-model>
+</dataSource>
