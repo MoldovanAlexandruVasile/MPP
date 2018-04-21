@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="catalog-client_main" target="1.9" />
+      <module name="catalog-client_test" target="1.9" />
+      <module name="catalog-core_main" target="1.9" />
+      <module name="catalog-core_test" target="1.9" />
+      <module name="catalog-rest-template_main" target="1.9" />
+      <module name="catalog-rest-template_test" target="1.9" />
+      <module name="catalog-web_main" target="1.9" />
+      <module name="catalog-web_test" target="1.9" />
+    </bytecodeTargetLevel>
+  </component>
+</project>
