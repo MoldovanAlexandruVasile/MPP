@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/catalog-3-grades.iml" filepath="$PROJECT_DIR$/.idea/modules/catalog-3-grades.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/catalog-3-grades_main.iml" filepath="$PROJECT_DIR$/.idea/modules/catalog-3-grades_main.iml" group="catalog-3-grades" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/catalog-3-grades_test.iml" filepath="$PROJECT_DIR$/.idea/modules/catalog-3-grades_test.iml" group="catalog-3-grades" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/catalog-core/catalog-core.iml" filepath="$PROJECT_DIR$/.idea/modules/catalog-core/catalog-core.iml" group="catalog-core" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/catalog-core/catalog-core_main.iml" filepath="$PROJECT_DIR$/.idea/modules/catalog-core/catalog-core_main.iml" group="catalog-core" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/catalog-core/catalog-core_test.iml" filepath="$PROJECT_DIR$/.idea/modules/catalog-core/catalog-core_test.iml" group="catalog-core" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/catalog-web/catalog-web.iml" filepath="$PROJECT_DIR$/.idea/modules/catalog-web/catalog-web.iml" group="catalog-web" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/catalog-web/catalog-web_main.iml" filepath="$PROJECT_DIR$/.idea/modules/catalog-web/catalog-web_main.iml" group="catalog-web" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/catalog-web/catalog-web_test.iml" filepath="$PROJECT_DIR$/.idea/modules/catalog-web/catalog-web_test.iml" group="catalog-web" />
+    </modules>
+  </component>
+</project>
