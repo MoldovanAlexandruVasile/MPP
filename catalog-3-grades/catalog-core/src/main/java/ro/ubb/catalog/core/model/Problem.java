@@ -19,7 +19,7 @@ public class Problem extends BaseEntity<Long> {
     @Column(name = "description", nullable = false)
     private String description;
 
-    @OneToMany(mappedBy = "problem", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "problem", fetch = FetchType.EAGER, orphanRemoval = true)
     private Set<StudentProblem> studentProblems = new HashSet<>();
 
     public Set<Student> getStudents() {

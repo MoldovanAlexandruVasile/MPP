@@ -9,10 +9,6 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 
-/**
- * Created by radu.
- */
-
 @Configuration
 @EnableWebMvc
 @ComponentScan({"ro.ubb.catalog.web.controller", "ro.ubb.catalog.web.converter"})

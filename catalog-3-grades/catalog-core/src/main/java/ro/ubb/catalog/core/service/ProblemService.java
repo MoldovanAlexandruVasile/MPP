@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface ProblemService {
     List<Problem> findAll();
+    Problem findProblem(Long problemId);
 }

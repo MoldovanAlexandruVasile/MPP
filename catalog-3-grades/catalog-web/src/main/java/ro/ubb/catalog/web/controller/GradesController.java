@@ -4,12 +4,17 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import ro.ubb.catalog.core.model.Problem;
 import ro.ubb.catalog.core.model.Student;
 import ro.ubb.catalog.core.model.StudentProblem;
+import ro.ubb.catalog.core.service.ProblemService;
 import ro.ubb.catalog.core.service.StudentService;
+import ro.ubb.catalog.web.converter.StudentConverter;
 import ro.ubb.catalog.web.converter.StudentProblemConverter;
+import ro.ubb.catalog.web.dto.StudentDto;
 import ro.ubb.catalog.web.dto.StudentProblemDto;
 
+import javax.swing.text.html.Option;
 import java.util.*;
 
 @RestController
@@ -22,8 +27,24 @@ public class GradesController {
     @Autowired
     private StudentProblemConverter studentProblemConverter;
 
+    @Autowired
+    private StudentConverter studentConverter;
 
-    @RequestMapping(value = "/grade/{student_id}", method = RequestMethod.GET)
+    @Autowired
+    private ProblemService problemService;
+
+    @RequestMapping(value = "/grades", method = RequestMethod.GET)
+    public List<StudentDto> getStudents() {
+        log.trace("getStudents");
+
+        List<Student> students = studentService.findAll();
+
+        log.trace("getStudents: students={}", students);
+
+        return new ArrayList<>(studentConverter.convertModelsToDtos(students));
+    }
+
+    @RequestMapping(value = "/grades/{studentId}", method = RequestMethod.GET)
     public Set<StudentProblemDto> getStudentProblems(
             @PathVariable final Long studentId) {
         log.trace("getStudentProblems: studentId={}", studentId);
@@ -41,7 +62,7 @@ public class GradesController {
         return result;
     }
 
-    @RequestMapping(value = "/grade/{student_id}", method = RequestMethod.PUT)
+    @RequestMapping(value = "/grades/{studentId}", method = RequestMethod.PUT)
     public Set<StudentProblemDto> updateStudentGrades(
             @PathVariable final Long studentId,
             @RequestBody final Set<StudentProblemDto> studentProblemDtos) {
@@ -58,12 +79,10 @@ public class GradesController {
         studentOptional.ifPresent(student -> {
             result.addAll(studentProblemConverter.
                     convertModelsToDtos(student.getStudentProblems()));
-
         });
 
         log.trace("getStudentProblems: result={}", result);
 
         return result;
     }
-
 }

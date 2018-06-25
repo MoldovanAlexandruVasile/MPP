@@ -27,7 +27,7 @@ public class StudentController {
     private StudentConverter studentConverter;
 
 
-    @RequestMapping(value = "/student", method = RequestMethod.GET)
+    @RequestMapping(value = "/students", method = RequestMethod.GET)
     public List<StudentDto> getStudents() {
         log.trace("getStudents");
 
@@ -38,7 +38,7 @@ public class StudentController {
         return new ArrayList<>(studentConverter.convertModelsToDtos(students));
     }
 
-    @RequestMapping(value = "/student/{id}", method = RequestMethod.PUT)
+    @RequestMapping(value = "/students/{studentId}", method = RequestMethod.PUT)
     public StudentDto updateStudent(
             @PathVariable final Long studentId,
             @RequestBody final StudentDto studentDto) {
@@ -56,7 +56,7 @@ public class StudentController {
         return result;
     }
 
-    @RequestMapping(value = "/student", method = RequestMethod.POST)
+    @RequestMapping(value = "/students", method = RequestMethod.POST)
     public StudentDto createStudent(
             @RequestBody final StudentDto studentDto) {
         log.trace("createStudent: studentDto={}", studentDto);
@@ -67,12 +67,12 @@ public class StudentController {
 
         StudentDto result = studentConverter.convertModelToDto(student);
 
-        log.trace("updateStudent: result={}", result);
+        log.trace("createStudent: result={}", result);
 
         return result;
     }
 
-    @RequestMapping(value = "student/{id}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "students/{studentId}", method = RequestMethod.DELETE)
     public ResponseEntity deleteStudent(@PathVariable final Long studentId) {
         log.trace("deleteStudent: studentId={}", studentId);
 

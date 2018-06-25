@@ -12,7 +12,7 @@ public interface StudentService {
 
     List<Student> findAll();
 
-    Student updateStudent(Long studentId, String serialNumber, String name, Set<Long> disciplines);
+    Student updateStudent(Long studentId, String serialNumber, String name, Set<Long> grades);
 
     Student createStudent(String serialNumber, String name);
 

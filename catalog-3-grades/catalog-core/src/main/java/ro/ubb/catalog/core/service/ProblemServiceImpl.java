@@ -8,6 +8,7 @@ import ro.ubb.catalog.core.model.Problem;
 import ro.ubb.catalog.core.repository.ProblemRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ProblemServiceImpl implements ProblemService {
@@ -27,5 +28,17 @@ public class ProblemServiceImpl implements ProblemService {
         log.trace("findAll: problems={}", problems);
 
         return problems;
+    }
+
+    @Override
+    public Problem findProblem(Long problemId) {
+        log.trace("findProblem: problemId={}", problemId);
+
+        Optional<Problem> problemOptional = problemRepository.findById(problemId);
+        Problem problem = problemOptional.get();
+
+        log.trace("findProblem: problem={}", problem);
+
+        return problem;
     }
 }

@@ -10,7 +10,7 @@ public class StudentProblemConverter
 
     @Override
     public StudentProblem convertDtoToModel(StudentProblemDto studentProblemDto) {
-        throw new RuntimeException("not yet implemented");
+        throw new RuntimeException("Runtime Exception");
     }
 
     @Override

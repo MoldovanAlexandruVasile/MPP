@@ -42,13 +42,13 @@ public class Student extends BaseEntity<Long> {
         studentProblems.add(studentProblem);
     }
 
-    public void addProblems(Set<Problem> disciplines) {
-        disciplines.forEach(this::addProblem);
+    public void addProblems(Set<Problem> problems) {
+        problems.forEach(this::addProblem);
     }
 
-    public void addGrade(Problem discipline, Integer grade) {
+    public void addGrade(Problem problem, Integer grade) {
         StudentProblem studentProblem = new StudentProblem();
-        studentProblem.setProblem(discipline);
+        studentProblem.setProblem(problem);
         studentProblem.setGrade(grade);
         studentProblem.setStudent(this);
         studentProblems.add(studentProblem);

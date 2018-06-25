@@ -28,7 +28,7 @@ public class ProblemController {
     private ProblemConverter problemConverter;
 
 
-    @RequestMapping(value = "/problem", method = RequestMethod.GET)
+    @RequestMapping(value = "/problems", method = RequestMethod.GET)
     public List<ProblemDto> getProblems() {
         log.trace("getProblems");
 

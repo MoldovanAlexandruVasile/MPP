@@ -16,7 +16,7 @@ import java.io.Serializable;
 public class StudentProblem implements Serializable {
 
     @Id
-    @ManyToOne(optional = false, fetch = FetchType.EAGER)
+    @ManyToOne(optional = false, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "student_id")
     private Student student;
 

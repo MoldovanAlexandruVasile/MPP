@@ -11,6 +11,7 @@ import ro.ubb.catalog.core.model.Student;
 import ro.ubb.catalog.core.repository.ProblemRepository;
 import ro.ubb.catalog.core.repository.StudentRepository;
 
+import javax.persistence.EntityManager;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -63,8 +64,8 @@ public class StudentServiceImpl implements StudentService {
             s.getProblems().stream()
                     .map(BaseEntity::getId)
                     .forEach(problems::remove);
-            List<Problem> disciplineList = problemRepository.findAllById(problems);
-            disciplineList.forEach(s::addProblem);
+            List<Problem> problemList = problemRepository.findAllById(problems);
+            problemList.forEach(s::addProblem);
         });
 
         log.trace("updateStudent: student={}", student.get());
